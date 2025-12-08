@@ -29,7 +29,7 @@ agent = initialize_agent(tools=tools, llm=llm, agent="zero-shot-react-descriptio
 
 agent.invoke("When was the last spacex launch is and how many days ago from today?")
 
-# result = llm.invoke("Give me a twit about todays wether in sri lanka")
+# result = llm.invoke("Give me a twit about today's weather in sri lanka")
 
 # print(result)
 
