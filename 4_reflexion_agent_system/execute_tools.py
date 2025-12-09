@@ -3,6 +3,9 @@ from typing import List, Dict, Any
 from langchain_core.messages import AIMessage, BaseMessage, ToolMessage, HumanMessage
 from langchain_community.tools import TavilySearchResults
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Create the Tavily search tool
 tavily_tool = TavilySearchResults(max_results=5)
 
@@ -75,3 +78,4 @@ print("Raw results:", results)
 if results:
     parsed_content = json.loads(results[0].content)
     print("Parsed content:", parsed_content)
+
