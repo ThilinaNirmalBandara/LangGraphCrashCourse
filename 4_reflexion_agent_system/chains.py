@@ -35,8 +35,10 @@ first_responder_prompt_template = actor_prompt_template.partial(
 
 llm = ChatOpenAI(model="gpt-5-nano")
 
-first_responder_chain = (first_responder_prompt_template | llm.bind_tools(
-    tools=[AnswerQuestion],tool_choice='AnswerQuestion') | pydantic_parser)
+first_responder_chain = first_responder_prompt_template | llm.bind_tools(
+    tools=[AnswerQuestion],tool_choice='AnswerQuestion')
+
+validator =  PydanticToolsParser(tools=[AnswerQuestion])
 
 
 revise_instructions = """Revise your previous answer using the new information.
