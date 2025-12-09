@@ -5,6 +5,8 @@ from langchain_core.messages import BaseMessage, HumanMessage
 from langgraph.graph import END, MessageGraph
 from chains import generation_chain, reflection_chain
 
+from pprint import pprint
+
 graph = MessageGraph()
 
 REFLECT = "reflect"
@@ -16,16 +18,19 @@ def generate_node(state):
     })
 
 def reflect_node(state):
-    response = reflection_chain.invoke({
+    res = reflection_chain.invoke({
         "messages": state
     })
-    return [HumanMessage(content=response.content)]
+    return [HumanMessage(content=res.content)]
 
 
 def should_continue(state):
-    if len(state) > 4:
+    if len(state) > 6:
         return END
     return REFLECT
+
+
+
 
 graph.add_node(GENERATE,generate_node)
 graph.add_node(REFLECT,reflect_node)
@@ -41,6 +46,19 @@ mermaid_code = app.get_graph().draw_mermaid()
 print(mermaid_code)
 app.get_graph().print_ascii()
 
+# custom pretty print function
+def print_pretty_response(messages):
+    print("\n" + "=" * 60)
+    print("FINAL FORMATTED OUTPUT")
+    print("=" * 60)
+
+    for msg in messages:
+        role = msg.__class__.__name__.replace("Message", "")
+        content = msg.content.strip() if msg.content else "<empty>"
+
+        print(f"\n[{role.upper()}]")
+        print(content)
+        print("-" * 60)
 
 """
 with open("graph.mmd", "w") as f:
@@ -50,4 +68,4 @@ with open("graph.mmd", "w") as f:
 """
 
 response = app.invoke(HumanMessage(content="AI agents taking over ai engineering"))
-print(response)
+print_pretty_response(response)
