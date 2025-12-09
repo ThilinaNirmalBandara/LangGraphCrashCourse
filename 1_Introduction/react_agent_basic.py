@@ -6,7 +6,7 @@ import datetime
 
 load_dotenv()
 
-llm = ChatGoogleGenerativeAI(model="gemini-flash-latest")
+llm = ChatGoogleGenerativeAI(model="gemini-flash-lite-latest")
 
 search_tool = TavilySearchResults(search_depth="basic")
 
@@ -14,7 +14,6 @@ search_tool = TavilySearchResults(search_depth="basic")
 def get_system_time(format: str = "%Y-%m-%d %h:%M:%S"):
     """
     Return the current date and time in the specified format
-    
     :param format: Description
     :type format: str
     """
