@@ -29,9 +29,6 @@ def should_continue(state):
         return END
     return REFLECT
 
-
-
-
 graph.add_node(GENERATE,generate_node)
 graph.add_node(REFLECT,reflect_node)
 
