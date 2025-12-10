@@ -41,7 +41,6 @@ result = app.invoke(
         "intermediate_steps": []
     }
 )
-
 print(result["agent_outcome"].return_values["output"], "final result")
 
 '''
