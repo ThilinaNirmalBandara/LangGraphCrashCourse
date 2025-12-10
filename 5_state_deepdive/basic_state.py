@@ -39,13 +39,13 @@ response = app.invoke(state)
 print(response)
 
 
-"""
+'''
 mermaid_code = app.get_graph().draw_mermaid()
-#print(mermaid_code)
-#app.get_graph().print_ascii()
+# print(mermaid_code)
+# app.get_graph().print_ascii()
 
-with open("graph.mmd", "w") as f:
+with open("basic_graph.mmd", "w") as f:
     f.write(mermaid_code)
 # Open graph in Mermaid Live Editor https://mermaid.live/edit
 # to preview and export as PNG/SVG.
-"""
+'''
