@@ -1,18 +1,19 @@
-from typing import TypedDict, List
+import operator
+from typing import TypedDict, List, Annotated
 from langgraph.graph import END, StateGraph
 
 
 class SimpleState(TypedDict):
     count :  int
-    sum : int
-    history : list[int]
+    sum : Annotated[int, operator.add]
+    history : Annotated[list[int], operator.concat]
 
 def increment(state: SimpleState) -> SimpleState:
     new_count = state["count"] + 1
     return {
         "count": new_count,
-        "sum": state["sum"] + new_count,
-        "history": state["history"]+[new_count]
+        "sum": new_count,
+        "history": [new_count]
 
     }
 
